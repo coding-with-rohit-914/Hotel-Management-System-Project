@@ -1,0 +1,64 @@
+#Installation:
+--------------
+Step 1: Install Python
+------------------------
+Step 2: Install Django (This Installation Install in Command Prompt using below link)
+-------------------------------------------------------------------------------------
+1st Command: pip install django
+-------------------------------
+1st Command: python.exe -m pip install --upgrade pip
+----------------------------------------------------
+#IMP: Any Problem Face to use below Link
+-----------------------------------------
+1) pip help install
+2) pip install pipenv
+3) pipenv install django
+
+Step 3: Install db browser for sqlite-3 using Google
+
+=====================================================================================
+#How To Run Project:
+--------------------
+Step 1: Unzip the Folder
+------
+Step 2: Open Folder & Open Main Project File
+------
+Step 3: Type in Path Section "cmd" & Press Enter Then Automatically Open Command Prompt
+-------
+Step 4: Enter This Command in Command Prompt:
+---------------------------------------------
+1st Command:-> python manage.py makemigrations --> (This Command Create the Database (Only one time use to run))
+--------------
+2st Command:-> python manage.py migrate --> (This Command import the Database (Only one time use to run))
+--------------
+3st Command:-> python manage.py runserver --> (This Command Run The Project(Always run for Run The Project))
+--------------
+
+Step 5:-> Login Details
+-----------------------
+•Default Admin Login Details: Username: admin
+----------------------------- Password: admin
+
+
+•Admin Login Details: Username: admin
+--------------------- Password: admin
+
+•User Login Details: Username: user
+-------------------  Password: user
+
+Step 6:->Cheack The Database
+----------------------------
+Step 1: Open DB Browser(SQ Lite)
+------
+
+Step 2: Click the Open Database (Find the database file in project file & Click-'db.sqlite3' an Select database & open it)
+------
+
+Step 3: Then Open the database click the browse data 
+------
+
+Step 4: Cheack the Dtatabase Table one by one
+------
+
+
+
