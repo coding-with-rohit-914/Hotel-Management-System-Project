@@ -1,0 +1,256 @@
+{% load static %}
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    {% include 'cdnlines.html' %}
+    <!-- {% include 'navbar.html' %} -->
+    <title>Bill Page</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.7.1.slim.js" integrity="sha256-UgvvN8vBkgO0luPSUl2s8TIlOSYRoGFAX4jlCIm9Adc=" crossorigin="anonymous"></script>
+    <style>
+
+        body{
+          background: url("/static/img/billback.jpg");
+          background-size: cover;
+          opacity: 0.9;
+        }
+
+        .input-group-text{
+            width: 130px;
+        }
+
+        @media print{
+            .btn{
+                display: none;
+            }
+            .NoPrint{
+                display: none;
+            }
+            .form-control, .input-group-text{
+                border: 0px;
+            }
+            .input-group-text{
+                border: 0px;
+                background-color: white;
+            }
+        }
+    </style>
+    <script>
+        function GetPrint()
+        {
+            window.print();
+        }
+
+        // Add Button
+        function BtnAdd()
+        {
+           var v = $("#TRow").clone().appendTo("#TBody");
+        //    $(v).fine("input").val('');
+           $(v).find("input").val('');
+           $(v).removeClass("d-none");
+           $(v).find("th").first().html($('#TBody tr').length - 1);
+        }
+
+        // Delete Button
+        function BtnDel(v)
+        {
+            $(v).parent().parent().remove();
+            GetTotal();
+
+            $("#TBody").find("tr").each(
+              function(index)
+              {
+                $(this).find("th").first().html(index);
+              }
+            )
+        }
+
+        function Calc(v)
+        {
+          var index = $(v).parent().parent().index();
+
+          var qty = document.getElementsByName("qty")[index].value;
+          var rate = document.getElementsByName("rate")[index].value;
+
+          var amt = qty * rate;
+          document.getElementsByName("amt")[index].value = amt;
+
+          GetTotal();
+
+        //   alert(index);
+        }
+
+        function GetTotal()
+        {
+            var sum=0;
+            var amts = document.getElementsByName("amt");
+
+            for (let index = 0; index < amts.length; index++)
+            {
+                var amt = amts[index].value;
+                sum = +(sum) + +(amt);
+            }
+
+            document.getElementById("FTotal").value = sum;
+
+            var gst = document.getElementById("FGST").value;
+            var net = +(sum) + +(gst);
+            document.getElementById("FNet").value = net;
+        }
+
+    </script>
+  </head>
+  <body>
+    <div class="container mt-5">
+        <div class="card">
+            <div class="card-header">
+                <div class="row">
+                 <img class="col-2" src="{% static 'img/hlogo.png' %}" style="border-radius: 50%;" height="90px">
+                  <h2 class="col-4">Hotel HighWay</h2>
+                   <h2 class="col-3"></h2>
+                    <h6 class="col-3">Hotel HighWay <br> +919087654321 <br> Pune-Mumbai HighWay, <br> Hindevadi, <br>546783. </h6>
+                </div>
+            </div>
+            <div class="card-body">
+                <div class="row">
+                  <h3 class="text-center">Invoice</h3>
+                    <div class="col-4">
+     <form method="post"> <!--- name="submit-to-google-sheet"-->
+
+      {% csrf_token %}
+                      <div class="input-group mb-3">
+                          <span class="input-group-text">Invoice No:</span>
+                          <input name="inv_no" type="number" class="form-control">
+                      </div>
+                      <div class="input-group mb-3">
+                          <span class="input-group-text">Table No:</span>
+                          <input name="table_no" type="number" class="form-control">
+                      </div>
+                      <div class="input-group mb-3">
+                          <span class="input-group-text">Room No:</span>
+                          <input name="room_no" type="number" class="form-control">
+                      </div>
+                      <!-- <div class="input-group mb-3">
+                          <span class="input-group-text">Room Type:</span>
+                          <input name="room_type" type="text" class="form-control">
+                      </div> -->
+                    </div>
+
+                    <div class="col-4">
+                      <div class="input-group mb-3">
+                          <span class="input-group-text">Customer Name:</span>
+                          <input name="cust_na" type="text" class="form-control">
+                      </div>
+                      <div class="input-group mb-3">
+                          <span class="input-group-text">Mobile No:</span>
+                          <input name="mo_no" type="number" class="form-control">
+                      </div>
+                      <div class="input-group mb-3">
+                          <span class="input-group-text">Address:</span>
+                          <input name="addr" type="text" class="form-control">
+                      </div>
+                      <!-- <div class="input-group mb-3">
+                          <span class="input-group-text">Services:</span>
+                          <input name="services" type="text" class="form-control">
+                      </div> -->
+                    </div>
+
+                    <div class="col-4">
+                        <div class="input-group mb-3">
+                            <span class="input-group-text">Check In Date:</span>
+                            <input name="cheak_in_date" type="date" class="form-control">
+                        </div>
+                        <div class="input-group mb-3">
+                            <span class="input-group-text">Check In Time:</span>
+                            <input name="cheak_in_time" type="Time" class="form-control">
+                        </div>
+                        <div class="input-group mb-3">
+                            <span class="input-group-text">Check Out Date:</span>
+                            <input name="cheak_out_date" type="date" class="form-control">
+                        </div>
+                        <div class="input-group mb-3">
+                            <span class="input-group-text">Cheak Out Time:</span>
+                            <input name="cheak_out_time" type="Time" class="form-control">
+                        </div>
+                    </div>
+                </div>
+
+                <table class="table table-borderd">
+                    <thead class="table-success">
+                      <tr>
+                        <th scope="col">•</th>
+                        <th scope="col">Decription</th>
+                        <th scope="col">Qty</th>
+                        <th scope="col">Rate</th>
+                        <th scope="col">Amount</th>
+                        <th scope="col" class="Noprint"><button type="button" class="btn btn-success" onclick="BtnAdd()">+</button></th>
+                      </tr>
+                    </thead>
+                    <tbody id="TBody">
+                      <tr id="TRow" class="d-none">
+                        <th scope="row">1</th>
+                        <td><input name="item_nm" type="text" class="form-control"></td>
+                        <td><input type="number" class="form-control text-end"  name="qty" onchange="Calc(this);"></td>
+                        <td><input type="number" class="form-control text-end" name="rate" onchange="Calc(this);"></td>
+                        <td><input type="number" class="form-control text-end" name="amt" value="0" readonly=""></td>
+                        <td class="Noprint"><button type="button" class="btn btn-danger" onclick="BtnDel(this)">X</button></td>
+                      </tr>
+                    </tbody>
+                  </table>
+
+                <div class="row">
+                    <div class="col-8">
+                        <a href="{% url 'adminhome' %}" class="btn btn-outline-info">Home</a>
+                        <button type="button" class="btn btn-outline-primary" onclick="GetPrint()">Print</button>
+                        <button type="submit" class="btn btn-outline-success">Submit</button>
+                        <a href="{% url 'paymentpage' %}" class="btn btn-outline-secondary">Payment</a>
+                        <input type="reset" value="Clear" class="btn btn-outline-danger">
+                        <br> <br>
+                        <h3 class="text-center"><u>Thank You! Visit Again...</u></h3>
+                    </div>
+                    <div class="col-4">
+                        <div class="input-group mb-3">
+                            <span class="input-group-text">Total Amt:</span>
+                            <input type="number" class="form-control text-end" id="FTotal" name="total_amt" readonly="">
+                        </div>
+                        <div class="input-group mb-3">
+                            <span class="input-group-text">GST Amt:</span>
+                            <input type="number" class="form-control text-end" id="FGST" name="gst_amt" onchange="GetTotal()">
+                        </div>
+                        <div class="input-group mb-3">
+                            <span class="input-group-text">Net Amt:</span>
+                            <input type="number" class="form-control text-end" id="FNet" name="net_amt" readonly="">
+                        </div>
+                    </div>
+                </div>
+            </div>
+          </div>
+    </form>
+    <span id="msg"></span>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+
+    <script>
+        const scriptURL = 'https://script.google.com/macros/s/AKfycbzSXdFkqKH6jj5XLoxBg2hMSRZTb-xHjPq7hwbYgpcdMCGHOff77U7Ws9a4zZSqdyst/exec'
+        const form = document.forms['submit-to-google-sheet']
+        const msg = document.getElementById("msg")
+
+        form.addEventListener('submit', e => {
+          e.preventDefault()
+          fetch(scriptURL, { method: 'POST', body: new FormData(form)})
+            .then(response => {
+                msg.innerHTML = "Bill Upload SuccessFully"
+                setTimeout(function(){
+                    msg.innerHTML = ""
+                },1000)
+                form.reset()
+            })
+            .catch(error => console.error('Error!', error.message))
+        })
+    </script>
+
+  </body>
+</html>

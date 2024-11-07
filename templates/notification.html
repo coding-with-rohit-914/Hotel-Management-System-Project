@@ -1,0 +1,105 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    {% include 'cdnlines.html' %}
+    {% include 'adminnavbar.html' %}
+    <title>Notification & Feedback Page</title>
+    <style media="screen">
+      body{
+        background: url('/static/img/cfback.jpeg');
+        background-size: cover;
+      }
+
+    .contact-left{
+         flex-basis: 35%;
+    }
+
+    .contact-left .sub-title{
+         font-size: 55px;
+    }
+
+    .contact-right{
+         flex-basis: 65%;
+     }
+
+     .contact-left p{
+         margin-top: 30px;
+     }
+
+     .contact-left p i{
+         color: #fa0505;
+         margin-right: 15px;
+         font-size: 25px;
+     }
+
+     .social-icon{
+         margin-top: 30px;
+     }
+
+     .social-icon a{
+         text-decoration: none;
+         font-size: 30px;
+         margin-right: 15px;
+         color: #fa0505;
+         display: inline-block;
+         transition: transform 0.5px;
+     }
+
+     .social-icon a:hover{
+         color: #f53333;
+         transform: translateZ(-5px);
+     }
+
+     .contact-right form{
+       width: 100%;
+     }
+
+     form input, form textarea{
+       width: 100%;
+       border: 0;
+       outline: none;
+       background: #262626;
+       opacity: 0.7;
+       padding: 15px;
+       margin: 15px 0;
+       color: #fff;
+       font-size: 18px;
+       border-radius: 6px;
+     }
+     .x{
+      font-size: 40px;
+      text-shadow: 3px 3px black;
+    }
+   </style>
+  </head>
+  <body>
+    <div id="contact">
+       <div class="container">
+           <div class="row">
+             <div class="contact-left">
+               <h1 class="sub-title"><span class="text-white a1 x">• Feedbacks</span></h1>
+                 {% if fbs %}
+                   {% for i in fbs %}
+                     <b class="text-success">Feedbacks:</b> <br>  <p class="text-danger"> {{ i.cname }} {{ i.cfeedback }}<p> <br>
+                   {% endfor %}
+                {% else %}
+                     <h3 class="text-success">No Feedbacks Avaliable</h3>
+                {% endif %}
+             </div>
+
+               <div class="contact-right">
+                 <h1 class="sub-title"><span class="text-white a1 x">• Feedbacks</span></h1>
+                   {% if fbs %}
+                     {% for i in fbs %}
+                       <b class="text-success">Feedbacks:</b> <br>  <p class="text-danger">{{ i.name }} {{ i.email }} {{ i.subject }} {{ i.feedback }}</p> <br>
+                     {% endfor %}
+                  {% else %}
+                       <h3 class="text-success">No Feedbacks Avaliable</h3>
+                  {% endif %}
+               </div>
+           </div>
+       </div>
+  </body>
+</html>

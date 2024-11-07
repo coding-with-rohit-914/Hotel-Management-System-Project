@@ -1,0 +1,133 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    {% include 'cdnlines.html' %}
+    {% include 'navbar.html' %}
+    <title>Contact & Feedback Page</title>
+    <style media="screen">
+      body{
+        background: url('/static/img/cfback.jpeg');
+        background-size: cover;
+      }
+
+    .contact-left{
+         flex-basis: 35%;
+    }
+
+    .contact-left .sub-title{
+         font-size: 55px;
+    }
+
+    .contact-right{
+         flex-basis: 65%;
+     }
+
+     .contact-left p{
+         margin-top: 30px;
+     }
+
+     .contact-left p i{
+         color: #fa0505;
+         margin-right: 15px;
+         font-size: 25px;
+     }
+
+     .social-icon{
+         margin-top: 30px;
+     }
+
+     .social-icon a{
+         text-decoration: none;
+         font-size: 30px;
+         margin-right: 15px;
+         color: #fa0505;
+         display: inline-block;
+         transition: transform 0.5px;
+     }
+
+     .social-icon a:hover{
+         color: #f53333;
+         transform: translateZ(-5px);
+     }
+
+     .contact-right form{
+       width: 100%;
+     }
+
+     form input, form textarea{
+       width: 100%;
+       border: 0;
+       outline: none;
+       background: #262626;
+       opacity: 0.7;
+       padding: 15px;
+       margin: 15px 0;
+       color: #fff;
+       font-size: 18px;
+       border-radius: 6px;
+     }
+     .x{
+      font-size: 40px;
+      text-shadow: 3px 3px black;
+    }
+   </style>
+  </head>
+  <body>
+    <div id="contact">
+       <div class="container">
+           <div class="row">
+               <div class="contact-left">
+                   <h1 class="sub-title"><span class="text-white a1 x">• Contact</span></h1>
+                   <p class="text-white"><i class="fa-solid fa-envelope"></i>hotelhighway2024@gmail.com</p>
+                   <p class="text-white"><i class="fa-solid fa-phone-volume"></i></i>+919087654321</p>
+                   <div class="social-icon">
+                       <a href="#"><i class="fa-brands fa-square-whatsapp"></i></a>
+                       <a href="#"><i class="fa-brands fa-square-facebook"></i></a>
+                       <a href="#"><i class="fa-brands fa-square-instagram"></i></a>
+                   </div>
+               </div>
+               <div class="contact-right">
+                   <form method="post"> <!--- name="submit-to-google-sheet" --->
+                     {% csrf_token %}
+                     <h1 class="text-white x">• Feedbacks</h1>
+                       <input class="col-md-5" type="text" name="Name" placeholder="Your Name:" required>
+                       <input class="col-5 col-md-5" type="email" name="Email" placeholder="Your Email:" required>
+                       <input class="col-md-10" type="text" name="Subject" placeholder="Subject:" required>
+                       <textarea class="col-md-10" name="Feedback" rows="2" placeholder="Your Message:"></textarea> <br>
+                       <button type="submit" class="btn btn-info">Submit</button>
+                   </form>
+                   <span id="msg"></span>
+                   {% if fbs %}
+                     {% for i in fbs %}
+                       <b class="text-success">Feedbacks:</b> <br>  <p class="text-danger">{{ i.name }} {{ i.email }} {{ i.subject }} {{ i.feedback }}</p> <br>
+                     {% endfor %}
+                  {% else %}
+                       <h3 class="text-success">No Feedbacks Avaliable</h3>
+                  {% endif %}
+               </div>
+           </div>
+       </div>
+
+       <script>
+           const scriptURL = 'https://script.google.com/macros/s/AKfycbxodJA3ed-FJXERBOZf80GtfFeaI-LcL1V0VGIWSNfDk3tW1OEKW6IuIVckW_OVY_0-vQ/exec'
+           const form = document.forms['submit-to-google-sheet']
+           const msg = document.getElementById("msg")
+
+           form.addEventListener('submit', e => {
+             e.preventDefault()
+             fetch(scriptURL, { method: 'POST', body: new FormData(form)})
+               .then(response => {
+                   msg.innerHTML = "Room Book SuccessFully"
+                   setTimeout(function(){
+                       msg.innerHTML = ""
+                   },1000)
+                   form.reset()
+               })
+               .catch(error => console.error('Error!', error.message))
+           })
+       </script>
+
+  </body>
+</html>
