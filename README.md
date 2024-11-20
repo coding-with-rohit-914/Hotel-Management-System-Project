@@ -1,2 +1,2 @@
 # Hotel-Management-System-Project
- Hotel-Management-System-Project
+ Hotel Management System - Project Overview The Hotel Management System (HMS) is a software application designed to help manage the operations of a hotel. It offers functionalities for both administrators and users (guests), allowing the hotel to efficiently handle booking reservations, room management, guest services, billing, and reporting. The system is typically divided into two primary interfaces: the Admin side and the User side.
