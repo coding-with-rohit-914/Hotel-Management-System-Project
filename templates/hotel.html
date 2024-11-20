@@ -1,0 +1,65 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    {% include 'cdnlines.html' %}
+    {% include 'navbar.html' %}
+    <title>Hotel Page</title>
+    <style media="screen">
+    body{
+      background: url('/static/img/hoteloage.jpg');
+      background-size: cover;
+    }
+    .a{
+      border-radius: 10%;
+    }
+
+    .b{
+      border-radius: 10px;
+    }
+    .x{
+        font-size: 60px;
+        text-shadow: 3px 3px black;
+    }
+    </style>
+  </head>
+  <body>
+    <marquee direction="left"><h1 class="text-center text-info x">Welcome To Hotel HighWay</h1></marquee>
+    <i> <h3 class="text-center text-success x">Hotel HighWay Gallery</h3></i>
+
+    <div class="container mt-5">
+          <div class="row">
+            <img class="col-4 a" src="{% static 'img/hotel1.jpg' %}" style= height="90px">
+            <img class="col-4 a" src="{% static 'img/hotel2.avif' %}" style= height="90px">
+            <img class="col-4 a" src="{% static 'img/hotel3.jpg' %}" style= height="90px">
+
+            <img class="col-4 mt-3 a" src="{% static 'img/hotel4.jpg' %}" style= height="90px">
+            <img class="col-4 mt-3 a" src="{% static 'img/hotel5.jpg' %}" style= height="90px">
+            <img class="col-4 mt-3 a" src="{% static 'img/hotel6.avif' %}" height"90px">
+
+            <video class="col-6 mt-3 b" width="340" height="240" controls="">
+                <source src="{% static 'img/video1.mp4' %}" type="video/mp4">
+            </video>
+
+            <video class="col-6 mt-3 b" width="340" height="240" controls="">
+                <source src="{% static 'img/video2.mp4' %}" type="video/mp4">
+            </video>
+
+            <video class="col-6 mt-3 b" width="340" height="240" controls="">
+                <source src="{% static 'img/video3.mp4' %}" type="video/mp4">
+            </video>
+
+            <video class="col-6 mt-3 b" width="340" height="240" controls="">
+                <source src="{% static 'img/video4.mp4' %}" type="video/mp4">
+            </video>
+
+            <div class="col-12 mt-3">
+              <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2877.5050611787246!2d73.40174141653921!3d18.769268361691072!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3be7ffe00807a3c7%3A0x72a7d5d888267068!2sMumbai%20-%20Pune%20Expy%2C%20Maharashtra!5e1!3m2!1sen!2sin!4v1706715549056!5m2!1sen!2sin" width="1060" height="530" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

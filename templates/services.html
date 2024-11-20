@@ -1,0 +1,90 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    {% include 'cdnlines.html' %}
+    {% include 'navbar.html' %}
+    <title>Services Page</title>
+    <style media="screen">
+    body{
+      background: url('/static/img/contact.jpg');
+      background-size: cover;
+      margin-bottom: 10px;
+    }
+
+    .a{
+      border-radius: 20%;
+    }
+    .b{
+      font-size: 30px;
+      text-shadow: 2px 2px black;
+    }
+    </style>
+  </head>
+  <body>
+    <h3 class="text-center text-danger b">The Facilities Will Be Available As Given Below</h1>
+
+      <div class="container mt-5">
+              <div class="row">
+                <div>
+                  <h4>Breakfast</h4>
+                  <img class="a" src="{% static 'img/breakfast.jpg' %}"  height="250px">
+                </div>
+                <div class="ml-3">
+                  <h4>Spa</h4>
+                  <img class="a"  src="{% static 'img/Spa.jpg' %}" width="340px"  height="250px">
+                </div>
+
+                <div class="ml-3">
+                  <h4>Dry Clean</h4>
+                  <img class="a"  src="{% static 'img/dclean.jpg' %}" width="345px" height="250px">
+                </div>
+
+                <div>
+                  <h4>Fitness room</h4>
+                  <img class="a" src="{% static 'img/gym.jpg' %}"  height="250px">
+                </div>
+                <div class="ml-3">
+                  <h4>Restaurant</h4>
+                  <img class="a"  src="{% static 'img/restaurant.jpg' %}" width="340px"  height="250px">
+                </div>
+
+                <div class="ml-3">
+                  <h4>Parking</h4>
+                  <img class="a"  src="{% static 'img/parking.jpg' %}" width="350px" height="250px">
+                </div>
+
+                <div>
+                  <h4 class="text-white">Swimming pool</h4>
+                  <img class="a" src="{% static 'img/swimmingpool.jpg' %}" width="380px"  height="250px">
+                </div>
+                <div class="ml-3">
+                  <h4 class="text-white">Bar</h4>
+                  <img class="a"  src="{% static 'img/bar.jpg' %}" width="340px"  height="250px">
+                </div>
+
+                <div class="ml-3">
+                  <h4 class="text-white">Car rental services</h4>
+                  <img class="a"  src="{% static 'img/carservice.jpg' %}" width="345px" height="250px">
+                </div>
+
+                <div>
+                  <h4 class="text-white">Internet Access</h4>
+                  <img class="a" src="{% static 'img/fwifi.jpg' %}" width="380px"  height="250px">
+                </div>
+                <div class="ml-3">
+                  <h4 class="text-white">Room Cleaning</h4>
+                  <img class="a"  src="{% static 'img/roomclean.jpg' %}" width="340px"  height="250px">
+                </div>
+
+                <div class="ml-3">
+                  <h4 class="text-white">Delivery Of Flowers</h4>
+                  <img  class="a" src="{% static 'img/Flowers.jpg' %}" width="345px" height="250px">
+                </div>
+              </div>
+          </div>
+        </div>
+      </div>
+  </body>
+</html>

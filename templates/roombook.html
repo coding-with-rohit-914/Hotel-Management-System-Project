@@ -1,0 +1,351 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    {% include 'cdnlines.html' %}
+    {% include 'navbar.html' %}
+    <title>Room Book Page</title>
+    <style media="screen">
+      body{
+        background: url('/static/img/roomback.webp');
+        background-size: cover;
+        opacity: 0.9;
+      }
+
+      /* Slideshow container */
+      .slideshow-container {
+        max-width: 1000px;
+        position: relative;
+        margin: auto;
+      }
+
+      /* Hide the images by default */
+      .mySlides {
+        display: none;
+      }
+
+      /* Next & previous buttons */
+      .prev, .next {
+        cursor: pointer;
+        position: absolute;
+        top: 50%;
+        width: auto;
+        margin-top: -22px;
+        padding: 16px;
+        color: white;
+        font-weight: bold;
+        font-size: 18px;
+        transition: 0.6s ease;
+        border-radius: 0 3px 3px 0;
+        user-select: none;
+      }
+
+      /* Position the "next button" to the right */
+      .next {
+        right: 0;
+        border-radius: 3px 0 0 3px;
+      }
+
+      /* On hover, add a black background color with a little bit see-through */
+      .prev:hover, .next:hover {
+        background-color: rgba(0,0,0,0.8);
+      }
+
+      /* Caption text */
+      .text {
+        color: #f2f2f2;
+        font-size: 15px;
+        padding: 8px 12px;
+        position: absolute;
+        bottom: 8px;
+        width: 100%;
+        text-align: center;
+      }
+
+      /* Number text (1/7 etc) */
+      .numbertext {
+        color: #f2f2f2;
+        font-size: 12px;
+        padding: 8px 12px;
+        position: absolute;
+        top: 0;
+      }
+
+      /* The dots/bullets/indicators */
+      .dot {
+        cursor: pointer;
+        height: 15px;
+        width: 15px;
+        margin: 0 2px;
+        background-color: #bbb;
+        border-radius: 50%;
+        display: inline-block;
+        transition: background-color 0.6s ease;
+      }
+
+      .active, .dot:hover {
+        background-color: #717171;
+      }
+
+      /* Fading animation */
+      .fade {
+        animation-name: fade;
+        animation-duration: 10s;
+      }
+
+      @keyframes fade {
+        from {opacity: .4}
+        to {opacity: 1}
+      }
+
+    </style>
+  </head>
+  <body>
+    <h3 class="text-center text-white mt-3">Book Your Room</h3>
+    <div class="container">
+      <form method="post"> <!---enctype="multipart/form-data">   name="submit-to-google-sheet" --->
+        {% csrf_token %}
+        <div class="card a">
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-4">
+                      <div class="input-group mb-2">
+                          <span class="input-group-text" >Full Name:</span>
+                          <input name="Full_Name" type="text" class="form-control ml-2">
+                      </div>
+                      <div class="input-group mb-2">
+                          <span class="input-group-text">Mobile No:</span>
+                          <input name="Mobile_No" type="number" class="form-control ml-2">
+                      </div>
+                      <div class="input-group mb-2">
+                          <span class="input-group-text">Email ID:</span>
+                          <input name="Email_ID" type="email" class="form-control ml-2">
+                      </div>
+                      <div class="input-group mb-2">
+                          <span class="input-group-text">Address:</span>
+                          <input name="Address" type="text" class="form-control ml-2">
+                      </div>
+
+                      <div class="input-group mb-2">
+                          <span class="input-group-text mb-1 mr-1">Select Room Type:</span>
+                          <select  type="text" name="Room_Type" >
+                            <option>Select</option>
+                            <option>Single Room</option>
+                            <option>Double Room</option>
+                            <option>Triple Room</option>
+                            <option>Quad Room</option>
+                            <option>Couple Room</option>
+                            <option>Mini or Junior Suite</option>
+                            <option>Suite/Executive Suite</option>
+                          </select>
+                      </div>
+
+                      <div class="col-8">
+                        <div class="input-group mb-2">
+                          <span class="input-group-text mb-2">No Of Adult:</span>
+                          <input name="No_Of_Adult" type="number"  class="form-control ml-2">
+
+                          <span class="input-group-text mt-2 mb-2">No Of Children:</span>
+                          <input name="No_Of_Children" type="number" class="form-control mt-2 ml-2">
+                        </div>
+                      </div>
+
+                      <!-- <div class="col-4"></div> -->
+
+                    </div>
+
+                 <div class="col-4">
+                  <div class="input-group mb-2">
+                      <span class="input-group-text mr-1">Id Proof:</span>
+                      <select  name="ID_Proof_Type" type="id">
+                        <option>Select</option>
+                        <option>Adhar Card</option>
+                        <option>PAN Card</option>
+                        <option>Voter ID</option>
+                        <option>Passport</option>
+                        <option>Driving License</option>
+                      </select>
+                  </div>
+                  <div class="input-group mb-2">
+                    <input type="file" value="Read & Display" name="ID_Proof_File">
+                  </div>
+
+                  <div class="input-group mb-3">
+                      <span class="input-group-text mr-1">Check In Date:</span>
+                      <input name="Check_In_Date" type="date" class="form-control" placeholder="Date"></time>
+                  </div>
+                  <div class="input-group mb-3">
+                      <span class="input-group-text mr-1">Cheak In Time:</span>
+                      <input name="Check_In_Time" type="time" class="form-control" placeholder="Time">
+                  </div>
+                  <div class="input-group mb-3">
+                      <span class="input-group-text mr-1">Cheak Out Date:</span>
+                      <input name="Check_Out_Date" type="date" class="form-control" placeholder="Date">
+                  </div>
+                  <div class="input-group mb-3">
+                      <span class="input-group-text mr-1">Cheak Out Time:</span>
+                      <input name="Check_Out_Time" type="time" class="form-control" placeholder="Time">
+                  </div>
+      </form>
+      <span id="msg"></span>
+                    <button type="submit" onclick="myFunction()" onclick="bookRoom()" class="btn btn-success">Submit</button>
+                    <button class="btn btn-danger" type="reset" name="Reset">Reset</button>
+                 </div>
+
+                 <!-- Slideshow container -->
+ <div class="slideshow-container" style="width: 350px; height:310px;">
+
+   <!-- Full-width images with number and caption text -->
+   <div class="mySlides">
+     <div class="numbertext">1 / 7</div>
+     <img src="{% static 'img/singleroom.jpg' %}" style="width:100%">
+     <div class="text">Single Room</div>
+   </div>
+
+   <div class="mySlides">
+     <div class="numbertext">2 / 7</div>
+     <img src="{% static 'img/DoubleRoom.webp' %}" style="width:100%">
+     <div class="text">Double Room</div>
+   </div>
+
+   <div class="mySlides">
+     <div class="numbertext">3 / 7</div>
+     <img src="{% static 'img/TripleRoom.webp' %}" style="width:100%">
+     <div class="text">Triple Room</div>
+   </div>
+
+   <div class="mySlides">
+     <div class="numbertext">4 / 7</div>
+     <img src="{% static 'img/qroom.jpeg' %}" style="width:100%">
+     <div class="text">Quad Room</div>
+   </div>
+
+   <div class="mySlides">
+     <div class="numbertext">5 / 7</div>
+     <img src="{% static 'img/coupleroom.webp' %}" style="width:100%">
+     <div class="text">Couple Room</div>
+   </div>
+
+   <div class="mySlides">
+     <div class="numbertext">6 / 7</div>
+     <img src="{% static 'img/Juniorsuiteroom.webp' %}" style="width:100%">
+     <div class="text">Junior Suite Room</div>
+   </div>
+
+   <div class="mySlides">
+     <div class="numbertext">7 / 7</div>
+     <img src="{% static 'img/suiteroom.webp' %}" style="width:100%">
+     <div class="text">Suite Room</div>
+   </div>
+
+   <!-- Next and previous buttons -->
+   <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
+   <a class="next" onclick="plusSlides(1)">&#10095;</a>
+ </div>
+ <br>
+
+ <!-- The dots/circles -->
+ <div style="text-align:center">
+   <span class="dot" onclick="currentSlide(1)"></span>
+   <span class="dot" onclick="currentSlide(2)"></span>
+   <span class="dot" onclick="currentSlide(3)"></span>
+   <span class="dot" onclick="currentSlide(4)"></span>
+   <span class="dot" onclick="currentSlide(5)"></span>
+   <span class="dot" onclick="currentSlide(6)"></span>
+   <span class="dot" onclick="currentSlide(7)"></span>
+ </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+    function myFunction() {
+      alert("Room Booked SuccessFully!!!");
+    }
+    </script>
+
+<script>
+let slideIndex = 1;
+showSlides(slideIndex);
+
+// Next/previous controls
+function plusSlides(n) {
+showSlides(slideIndex += n);
+}
+
+// Thumbnail image controls
+function currentSlide(n) {
+showSlides(slideIndex = n);
+}
+
+function showSlides(n) {
+let i;
+let slides = document.getElementsByClassName("mySlides");
+let dots = document.getElementsByClassName("dot");
+if (n > slides.length) {slideIndex = 1}
+if (n < 1) {slideIndex = slides.length}
+for (i = 0; i < slides.length; i++) {
+slides[i].style.display = "none";
+}
+for (i = 0; i < dots.length; i++) {
+dots[i].className = dots[i].className.replace(" active", "");
+}
+slides[slideIndex-1].style.display = "block";
+dots[slideIndex-1].className += " active";
+}
+</script>
+
+<script>
+    const scriptURL = 'https://script.google.com/macros/s/AKfycbz3daf0_DjkFjULFI7jmp-DWZsbTxNdLgIBdjGCGv-BcA3BWReohlG2E55hyjTmTRPK/exec'
+    const form = document.forms['submit-to-google-sheet']
+    const msg = document.getElementById("msg")
+
+    form.addEventListener('submit', e => {
+      e.preventDefault()
+      fetch(scriptURL, { method: 'POST', body: new FormData(form)})
+        .then(response => {
+            msg.innerHTML = "Room Book SuccessFully"
+            setTimeout(function(){
+                msg.innerHTML = ""
+            },1000)
+            form.reset()
+        })
+        .catch(error => console.error('Error!', error.message))
+    })
+</script>
+
+<script>
+  let availableRooms = 35;
+  let bookedRooms = 0;
+
+  function bookRoom() {
+    if (availableRooms > 0) {
+    availableRooms--;
+    bookedRooms++;
+    updateDisplay();
+    } else {
+    alert("No available rooms left.");
+    }
+  }
+
+  function checkoutRoom() {
+    if (bookedRooms > 0) {
+    availableRooms++;
+    bookedRooms--;
+    updateDisplay();
+    } else {
+    alert("No rooms are currently booked.");
+    }
+  }
+
+  function updateDisplay() {
+    document.getElementById("availableRooms").textContent = availableRooms;
+    document.getElementById("bookedRooms").textContent = bookedRooms;
+  }
+  </script>
+
+  </body>
+</html>

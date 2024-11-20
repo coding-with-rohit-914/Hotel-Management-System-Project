@@ -1,0 +1,70 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    {% include 'cdnlines.html' %}
+    {% include 'navbar.html' %}
+    <title>Room Feedback Page</title>
+    <style media="screen">
+
+      body{
+        overflow-x: hidden;
+      }
+
+      .btn.btn-2{
+        opacity: 0.7;
+        display: inline-block;
+        background: #b007e3;
+      }
+
+      form input, form textarea{
+       width: 100%;
+       border: 0;
+       outline: none;
+       background: #262626;
+       opacity: 0.7;
+       padding: 15px;
+       margin: 15px 0;
+       color: #fff;
+       font-size: 18px;
+       border-radius: 6px;
+     }
+
+     form .btn2{
+       padding: 14px 60px;
+       font-size: 18px;
+       margin-top: 20px;
+       cursor: pointer;
+     }
+    </style>
+  </head>
+  <body class="bg-info">
+        <h1 class="text-center">Give Feedback</h1>
+        <div class="coantainer-fluid">
+          <div class="row">
+            <div class="offset-md-4 col-md-4">
+              <div class="contact-right">
+                  <form method="post">
+                    {% csrf_token %}
+                      <input class="col-md-10" type="text" name="cname" placeholder="Your Name:" required>
+                      <textarea class="col-md-10" name="cfeedback" rows="2" placeholder="Your Message:" required></textarea> <br>
+                      <button type="submit" class="btn btn-2 text-center">Submit</button>
+                  </form>
+
+                 {% if fbs %}
+                   {% for i in fbs %}
+                     <b class="text-dark">Feedbacks:</b>
+                     <br>
+                     <p class="text-danger"> {{ i.cname }} {{ i.cfeedback }}<p>
+                     <br>
+                   {% endfor %}
+                {% else %}
+                     <h6 class="text-dark">No Feedbacks Avaliable</h6>
+                {% endif %}
+
+            </div>
+          </div>
+        </div>
+  </body>
+</html>

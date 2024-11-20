@@ -1,0 +1,83 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    {% include 'cdnlines.html' %}
+    {% include 'navbar.html' %}
+    <title>View Booking Page</title>
+    <style>
+    body{
+      background: url("/static/img/updatebackavif.avif");
+      background-size: cover;
+      opacity: 0.9;
+    }
+  </style>
+  </head>
+  <body>
+    <marquee><h1 class="text-center text-info">Update Booking Here!</h1></marquee>
+
+    <div class="container">
+      <form action="{% url 'updatebookingdata' row.id%}" method="post">
+        {% csrf_token %}
+        <div class="card">
+          <h4 class="text-center text-dark">Please Enter Your Data Here!</h4>
+          <div class="card-body">
+            <div class="row">
+          <div class="col-4 mt-2">
+            <label>Full Name:</label>
+            <input type="text" name="Full_Name" class="from-control" placeholder="First Name:" value="{{ row.fullname }}">
+
+            <label class="mt-3">Mobile No:</label>
+            <input type="number" name="Mobile_No" class="from-control" placeholder="Mobile Number:" value="{{ row.mobile }}">
+
+            <label class="mt-3">Email ID:</label>
+            <input type="email" name="Email_ID" class="from-control" placeholder="Email ID:" value="{{ row.email }}">
+
+            <br>
+            <label class="mt-3">Address:</label>
+            <input type="text" name="Address" class="from-control" placeholder="Address:" value="{{ row.address }}">
+          </div>
+
+          <div class="col-4 mt-2">
+            <label>Room Type:</label>
+            <input type="text" name="Room_Type" class="from-control" placeholder="Room Type:" value="{{ row.room }}">
+
+            <label class="mt-3">No Of Adult:</label>
+            <input type="number" name="No_Of_Adult" class="from-control" placeholder="No Of Adult:" value="{{ row.adult }}">
+
+            <label class="mt-3">No Of Children:</label>
+            <input type="number" name="No_Of_Children" class="from-control" placeholder="No Of Children:" value="{{ row.children }}">
+
+            <label class="mt-3">ID Proof Type:</label>
+            <input type="text" name="ID_Proof_Type" class="from-control" placeholder="ID Proof Type:" value="{{ row.idprrof }}">
+
+            <label class="mt-3">Upload File:</label>
+            <input type="file" name="ID_Proof_File" class="from-control" value="{{ row.idprroffile }}">
+          </div>
+
+          <div class="col-4 mt-2">
+            <label>Cheak In Date:</label>
+            <input type="date" name="Check_In_Date" class="from-control" placeholder="Check In Date:" value="{{ row.cheakindate }}">
+            <br>
+            <label class="mt-3">Cheak In Time:</label>
+            <input type="time" name="Check_In_Time" class="from-control" placeholder="Cheak In Time:" value="{{ row.cheakintime }}">
+            <br>
+            <label class="mt-3">Cheak Out Date:</label>
+            <input type="date" name="Check_Out_Date" class="from-control" placeholder="Cheak Out Date:" value="{{ row.cheakoutdate }}">
+            <br>
+            <label class="mt-3">Cheak Out time:</label>
+            <input type="time" name="Check_Out_Time" class="from-control" placeholder="Cheak Out Time:" value="{{ row.cheakouttime }}">
+          </div>
+
+          <div class="container mt-3 text-center">
+            <input type="submit" class="btn btn-outline-success btn-sm" value="Update">
+            <a href="{% url 'viewbooking' %}" class="btn btn-outline-primary btn-sm">Back</a>
+          </div>
+          </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

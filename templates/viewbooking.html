@@ -1,0 +1,92 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    {% include 'cdnlines.html' %}
+    {% include 'navbar.html' %}
+    <title>View Booking Page</title>
+    <style media="screen">
+    body{
+      background: url("/static/img/viewbook.avif");
+      background-size: cover;
+      opacity: 0.9;
+      overflow-x: hidden;
+    }
+    .a{
+      font-size: 50px;
+      text-shadow: 3px 3px black;
+      color: aqua;
+    }
+    </style>
+  </head>
+  <body>
+    <div class="container-fluid mt-5">
+      <div class="card">
+        <div class="card-header">
+    <h1 class="text-center text-warning">All Booking Here!</h1>
+
+ <div class="text-left">
+       <a href="{% url 'adminhome' %}" class="btn btn-info">Home</a>
+       <a href="{% url 'roombook' %}" class="btn btn-primary">Book Room</a>
+ </div>
+       {% if data %}
+       <table class="table mt-1 table-bordered text-center">
+         <thead>
+           <tr>
+             <th>Full Name</th>
+             <th>Mobile No</th>
+             <th>Email ID</th>
+             <th>Address</th>
+             <th>Room Type</th>
+             <th>No Of Adult</th>
+             <th>No Of Children</th>
+             <th>Id Proof Type</th>
+             <th>Id Proof</th>
+             <th>Cheak In Date</th>
+             <th>Cheak In Time</th>
+             <th>Cheak Out Date</th>
+             <th>Cheak Out Time</th>
+             <th>Action</th>
+           </tr>
+         </thead>
+         <tbody>
+           {% for i in data %}
+           <tr class="text-center">
+             <td>{{ i.fullname }}</td>
+             <td>{{ i.mobile }}</td>
+             <td>{{ i.email }}</td>
+             <td>{{ i.address }}</td>
+             <td>{{ i.room }}</td>
+             <td>{{ i.adult }}</td>
+             <td>{{ i.children }}</td>
+             <td>{{ i.idprrof }}</td>
+             <td>{{ i.idprroffile }}</td>
+             <td>{{ i.cheakindate }}</td>
+             <td>{{ i.cheakintime }}</td>
+             <td>{{ i.cheakoutdate }}</td>
+             <td>{{ i.cheakouttime }}</td>
+             <td>
+             <a href="{% url 'updatebooking' i.id %}" class=""><i class="fa-solid fa-pen-to-square"></i></a>
+             <a href="{% url 'paymentpage' %}" class=""><i class="fa-brands fa-cc-amazon-pay"></i></a>
+             <a href="{% url 'deletebooking' i.id %}" onclick="myFunction()" class=""><i class="fa-solid fa-delete-left"></i></a>
+             </td>
+           </tr>
+           {% endfor %}
+         </tbody>
+       </table>
+       {% else %}
+       <h2 class="text-center">No Booking Data Available!</h2>
+       {% endif %}
+       </div>
+     </div>
+   </div>
+
+<script>
+function myFunction() {
+  alert("Booking Deleted SuccessFully!!!");
+}
+</script>
+
+  </body>
+</html>

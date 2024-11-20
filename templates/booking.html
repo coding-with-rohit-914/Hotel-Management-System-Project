@@ -1,0 +1,453 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    {% include 'cdnlines.html' %}
+    {% include 'navbar.html' %}
+    <title>Room Booking Page</title>
+    <style media="screen">
+    body{
+      background: url('/static/img/backbook.webp');
+      background-size: cover;
+      opacity: 0.9;
+    }
+
+      .a{
+        border-radius: 30%;
+        width: 370px;
+      }
+      .a{
+      font-size: 25px;
+      text-shadow: 2px 2px black;
+      color: aqua;
+    }
+    </style>
+  </head>
+  <body style="background-color: #121212">
+    <div class="container mt-5">
+      <h1 class="text-center  a">Select Your Room & Book Now</h1>
+            <div class="card-header">
+                <div class="row text-white">
+
+<!--- Booking Pannel ---------------------------------------->
+
+              <div class="col-4">
+                  <ul class="box-info">
+				             <li>
+					               <i class='bx bxs-hotel'></i>
+					                 <span class="text">
+						                    <h3>15</h3>
+						                        <p>Total Rooms</p>
+					                 </span>
+				             </li>
+              </div>
+              <div class="col-4">
+				          <li>
+					            <i class='bx bxs-home-smile'></i>
+					              <span class="text">
+						                 <h3><span id="bookedRooms">0</span></h3>
+						                     <p>Booked Room</p>
+						                        <a href="{% url 'roombook' %}"><button class="btn btn-success" onclick="bookRoom()">Book Room</button></a>
+                                    <a href="#"><button class="btn btn-danger" onclick="checkoutRoom()">Cansal</button></a>
+					              </span>
+				          </li>
+              </div>
+              <div class="col-3">
+				          <li>
+					            <i class='bx bxs-home-circle'></i>
+					              <span class="text">
+						                 <h3><span id="availableRooms">15</span></h3>
+						                     <p>Available Room</p>
+					              </span>
+				          </li>
+			            </ul>
+             </div>
+
+<!-- 11111111111111111111111111111111111111111111111111111111111111111111111 -->
+<div id="carouselExampleIndicators" class="carousel slide a col-4 mt-3" data-bs-ride="carousel">
+                          <div class="carousel-indicators">
+                           <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+                           <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2"></button>
+                           <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="Slide 3"></button>
+                          </div>
+                        <div class="carousel-inner">
+                          <div class="carousel-item active">
+                            <img src="{% static 'img/singleroom.jpg' %}" class="d-block w-100"                         alt="...">
+                          </div>
+                          <div class="carousel-item">
+                            <img src="{% static 'img/singleroom1.jpg' %}" class="d-block w-100" alt="...">
+                          </div>
+                          <div class="carousel-item">
+                            <img src="{% static 'img/singleroom2.jpg' %}" class="d-block w-100" alt="...">
+                          </div>
+                         </div>
+                         <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
+                           <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                           <span class="visually-hidden">Previous</span>
+                         </button>
+                         <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
+                           <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                           <span class="visually-hidden">Next</span>
+                         </button>
+                       </div>
+
+                  <div class="col-4 mt-3"><h2>Single Room</h2>
+                    <p>Reviews:⭐</p>
+                  <p>A Room assigned to one person.</p>
+                  <h6>Avalable Services:</h6>
+                  <i class="fa-solid fa-wifi ml-1"></i>
+                  <i class="fa-solid fa-fan"></i>
+                  <i class="fa-solid fa-solar-panel"></i>
+                  <i class="fa-solid fa-broom"></i>
+                </div>
+                   <div class="col-3 mt-3">
+                     <h5>Rate: 500/Day</h3>
+                     <!-- <h4><a href="{% url 'roombook' %}" class="btn btn-success">Book Now</a></h3> -->
+                     <h4><a href="{% url 'roomfeedback' %}" class="btn btn-success">Feddback</a></h3>
+                   </div>
+                </div>
+            </div>
+<!-- 22222222222222222222222222222222222222222222222222222222222222222222222 -->
+            <div class="mt-5">
+                <!-- <div class="card"> -->
+                    <div class="card-header">
+                        <div class="row text-white">
+                          <div id="carouselExampleIndicators" class="carousel slide a col-4" data-bs-ride="carousel">
+                            <div class="carousel-indicators">
+                             <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+                             <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2"></button>
+                             <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="Slide 3"></button>
+                            </div>
+                          <div class="carousel-inner">
+                            <div class="carousel-item active">
+                              <img src="{% static 'img/DoubleRoom.webp' %}" class="d-block w-100"                         alt="...">
+                            </div>
+                            <div class="carousel-item">
+                              <img src="{% static 'img/doubleroom2.webp' %}" class="d-block w-100" alt="...">
+                            </div>
+                            <div class="carousel-item">
+                              <img src="{% static 'img/doubleroom3.jpeg' %}" class="d-block w-100" alt="...">
+                            </div>
+                           </div>
+                           <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
+                             <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                             <span class="visually-hidden">Previous</span>
+                           </button>
+                           <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
+                             <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                             <span class="visually-hidden">Next</span>
+                           </button>
+                         </div>
+
+                         <div class="col-4">
+                         <h2>Double Room</h2>
+                         <p>Reviews: ⭐⭐⭐</p>
+                         <p>A room assigned to two people. May have one or more beds.</p>
+                          <h6>Avalable Services:</h6>
+                          <i class="fa-solid fa-wifi ml-1"></i>
+                          <i class="fa-solid fa-tv"></i>
+                          <i class="fa-solid fa-solar-panel"></i>
+                          <i class="fa-solid fa-fan"></i>
+                          <i class="fa-solid fa-broom"></i>
+                        </div>
+                        <div class="col-3">
+                          <h5>Rate: 1000/Day</h3>
+                          <!-- <h4><a href="{% url 'roombook' %}" class="btn btn-success">Book Now</a></h3> -->
+                          <h4><a href="{% url 'roomfeedback' %}" class="btn btn-success">Feddback</a></h3>
+                        </div>
+                      </div>
+                    </div>
+<!-- 33333333333333333333333333333333333333333333333333333333333333333333333 -->
+        <div class="mt-5">
+                <div class="card-header  text-white">
+                    <div class="row">
+                      <div id="carouselExampleIndicators" class="carousel slide a col-4" data-bs-ride="carousel">
+                            <div class="carousel-indicators">
+                             <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+                             <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2"></button>
+                             <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="Slide 3"></button>
+                            </div>
+                          <div class="carousel-inner">
+                            <div class="carousel-item active">
+                              <img src="{% static 'img/coupleroom.webp' %}" class="d-block w-100"                         alt="...">
+                            </div>
+                            <div class="carousel-item">
+                              <img src="{% static 'img/coupleroom1.jpeg' %}" class="d-block w-100" alt="...">
+                            </div>
+                            <div class="carousel-item">
+                              <img src="{% static 'img/coupleroom2.webp' %}" class="d-block w-100" alt="...">
+                            </div>
+                           </div>
+                           <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
+                             <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                             <span class="visually-hidden">Previous</span>
+                           </button>
+                           <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
+                             <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                             <span class="visually-hidden">Next</span>
+                           </button>
+                         </div>
+
+                      <div class="col-4">
+                      <h2>Couple Room</h2>
+                      <p>Reviews: ⭐⭐⭐⭐⭐</p>
+                      <p>allows single couples to stay with them.</p>
+                      <h6>Avalable Services:</h6>
+                      <i class="fa-solid fa-wifi ml-1"></i>
+                      <i class="fa-solid fa-tv"></i>
+                      <i class="fa-solid fa-solar-panel"></i>
+                      <i class="fa-solid fa-fan"></i>
+                      <i class="fa-solid fa-spray-can-sparkles"></i>
+                      <i class="fa-solid fa-broom"></i>
+                      <i class="fa-solid fa-shower"></i>
+                      <i class="fa-solid fa-bath"></i>
+                    </div>
+                    <div class="col-3">
+                      <h5>Rate: 1500/Day</h3>
+                      <!-- <h4><a href="{% url 'roombook' %}" class="btn btn-success">Book Now</a></h3> -->
+                      <h4><a href="{% url 'roomfeedback' %}" class="btn btn-success">Feddback</a></h3>
+                    </div>
+                  </div>
+                </div>
+<!-- 44444444444444444444444444444444444444444444444444444444444444444444444 -->
+                <div class="mt-5">
+                        <div class="card-header text-white">
+                            <div class="row">
+                              <div id="carouselExampleIndicators" class="carousel slide a col-4" data-bs-ride="carousel">
+                            <div class="carousel-indicators">
+                             <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+                             <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2"></button>
+                             <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="Slide 3"></button>
+                            </div>
+                          <div class="carousel-inner">
+                            <div class="carousel-item active">
+                              <img src="{% static 'img/TripleRoom.webp' %}" class="d-block w-100"                         alt="...">
+                            </div>
+                            <div class="carousel-item">
+                              <img src="{% static 'img/tripleroom2.jpg' %}" class="d-block w-100" alt="...">
+                            </div>
+                            <div class="carousel-item">
+                              <img src="{% static 'img/tripleroom1.jpg' %}" class="d-block w-100" alt="...">
+                            </div>
+                           </div>
+                           <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
+                             <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                             <span class="visually-hidden">Previous</span>
+                           </button>
+                           <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
+                             <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                             <span class="visually-hidden">Next</span>
+                           </button>
+                         </div>
+
+                              <div class="col-4">
+                              <h2>Triple Room</h2>
+                              <p>Reviews: ⭐⭐⭐</p>
+                              <p>A room that can accommodate three persons and has been fitted with three twin beds, one double bed and one twin bed or two double beds.</p>
+                              <h6>Avalable Services:</h6>
+                              <i class="fa-solid fa-wifi ml-1"></i>
+                              <i class="fa-solid fa-solar-panel"></i>
+                              <i class="fa-solid fa-fan"></i>
+                              <i class="fa-solid fa-broom"></i>
+                            </div>
+                            <div class="col-3">
+                              <h5>Rate: 2000/Day</h3>
+                              <!-- <h4><a href="{% url 'roombook' %}" class="btn btn-success">Book Now</a></h3> -->
+                              <h4><a href="{% url 'roomfeedback' %}" class="btn btn-success">Feddback</a></h3>
+                            </div>
+                          </div>
+                        </div>
+<!-- 55555555555555555555555555555555555555555555555555555555555555555555555 -->
+                        <div class="mt-5">
+                                <div class="card-header text-white">
+                                    <div class="row">
+
+                                      <div id="carouselExampleIndicators" class="carousel slide a col-4" data-bs-ride="carousel">
+                            <div class="carousel-indicators">
+                             <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+                             <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2"></button>
+                             <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="Slide 3"></button>
+                            </div>
+                          <div class="carousel-inner">
+                            <div class="carousel-item active">
+                              <img src="{% static 'img/qroom.jpeg' %}" class="d-block w-100"                         alt="...">
+                            </div>
+                            <div class="carousel-item">
+                              <img src="{% static 'img/quadroom2.jpg' %}" class="d-block w-100" alt="...">
+                            </div>
+                            <div class="carousel-item">
+                              <img src="{% static 'img/quadroom1.jpg' %}" class="d-block w-100" alt="...">
+                            </div>
+                           </div>
+                           <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
+                             <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                             <span class="visually-hidden">Previous</span>
+                           </button>
+                           <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
+                             <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                             <span class="visually-hidden">Next</span>
+                           </button>
+                         </div>
+
+                                      <div class="col-4">
+                                      <h2>Quad Room</h2>
+                                      <p>Reviews: ⭐⭐⭐⭐</p>
+                                      <p>A room assigned to four people. May have two or more beds.</p>
+                                      <h6>Avalable Services:</h6>
+                                      <i class="fa-solid fa-wifi ml-1"></i>
+                                      <i class="fa-solid fa-tv"></i>
+                                      <i class="fa-solid fa-solar-panel"></i>
+                                      <i class="fa-solid fa-fan"></i>
+                                      <i class="fa-solid fa-broom"></i>
+                                      <i class="fa-solid fa-shower"></i>
+                                    </div>
+                                    <div class="col-3">
+                                      <h5>Rate: 3000/Day</h3>
+                                      <!-- <h4><a href="{% url 'roombook' %}" class="btn btn-success">Book Now</a></h3> -->
+                                      <h4><a href="{% url 'roomfeedback' %}" class="btn btn-success">Feddback</a></h3>
+                                    </div>
+                                  </div>
+                                </div>
+<!-- 66666666666666666666666666666666666666666666666666666666666666666666666 -->
+      <div class="mt-5">
+            <div class="card-header text-white">
+                <div class="row">
+
+                  <div id="carouselExampleIndicators" class="carousel slide a col-4" data-bs-ride="carousel">
+                            <div class="carousel-indicators">
+                             <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+                             <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2"></button>
+                             <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="Slide 3"></button>
+                            </div>
+                          <div class="carousel-inner">
+                            <div class="carousel-item active">
+                              <img src="{% static 'img/Juniorsuiteroom.webp' %}" class="d-block w-100"                         alt="...">
+                            </div>
+                            <div class="carousel-item">
+                              <img src="{% static 'img/mini&juniorroom1.jpg' %}" class="d-block w-100" alt="...">
+                            </div>
+                            <div class="carousel-item">
+                              <img src="{% static 'img/mini&juniorroom2.jpg' %}" class="d-block w-100" alt="...">
+                            </div>
+                           </div>
+                           <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
+                             <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                             <span class="visually-hidden">Previous</span>
+                           </button>
+                           <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
+                             <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                             <span class="visually-hidden">Next</span>
+                           </button>
+                         </div>
+
+                  <div class="col-4">
+                  <h2>Mini or Junior Suite</h2>
+                  <p>Reviews: ⭐⭐⭐⭐</p>
+                  <p>A single room with a bed and sitting area. Sometimes the sleeping area is in a bedroom separate from the parlour or living room.</p>
+                  <h6>Avalable Services:</h6>
+                  <i class="fa-solid fa-wifi ml-1"></i>
+                  <i class="fa-solid fa-tv"></i>
+                  <i class="fa-solid fa-solar-panel"></i>
+                  <i class="fa-solid fa-fan"></i>
+                  <i class="fa-solid fa-shower"></i>
+                  <i class="fa-solid fa-bath"></i>
+                  <i class="fa-solid fa-broom"></i>
+                </div>
+                  <div class="col-3">
+                    <h5>Rate: 4000/Day</h3>
+                    <!-- <h4><a href="{% url 'roombook' %}" class="btn btn-success">Book Now</a></h3> -->
+                    <h4><a href="{% url 'roomfeedback' %}" class="btn btn-success">Feddback</a></h3>
+                  </div>
+                </div>
+              </div>
+<!-- 77777777777777777777777777777777777777777777777777777777777777777777777 -->
+              <div class="mt-5">
+                    <div class="card-header  text-white">
+                        <div class="row">
+
+                          <div id="carouselExampleIndicators" class="carousel slide a col-4" data-bs-ride="carousel">
+                            <div class="carousel-indicators">
+                             <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+                             <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2"></button>
+                             <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="Slide 3"></button>
+                            </div>
+                          <div class="carousel-inner">
+                            <div class="carousel-item active">
+                              <img src="{% static 'img/suiteroom.webp' %}" class="d-block w-100"                         alt="...">
+                            </div>
+                            <div class="carousel-item">
+                              <img src="{% static 'img/SuiteExecutiveSuite2.jpg' %}" class="d-block w-100" alt="...">
+                            </div>
+                            <div class="carousel-item">
+                              <img src="{% static 'img/SuiteExecutiveSuite1jpg.jpg' %}" class="d-block w-100" alt="...">
+                            </div>
+                           </div>
+                           <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
+                             <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                             <span class="visually-hidden">Previous</span>
+                           </button>
+                           <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
+                             <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                             <span class="visually-hidden">Next</span>
+                           </button>
+                         </div>
+
+                          <div class="col-4">
+                          <h2>Suite / Executive Suite</h2>
+                          <p>Reviews: ⭐⭐⭐⭐⭐</p>
+                          <p>A parlour or living room connected with to one or more bedrooms. (A room with one or more bedrooms and a separate living space.)</h6> <br>
+                          <i class="fa-solid fa-wifi ml-1"></i>
+                          <i class="fa-solid fa-tv"></i>
+                          <i class="fa-solid fa-solar-panel"></i>
+                          <i class="fa-solid fa-fan"></i>
+                          <i class="fa-solid fa-shower"></i>
+                          <i class="fa-solid fa-bath"></i>
+                          <i class="fa-solid fa-broom"></i>
+                        </div>
+                          <div class="col-3">
+                            <h5>Rate: 4500/Day</h3>
+                            <!-- <h4><a href="{% url 'roombook' %}" class="btn btn-success">Book Now</a></h3> -->
+                            <h4><a href="{% url 'roomfeedback' %}" class="btn btn-success">Feddback</a></h3>
+                          </div>
+                        </div>
+                      </div>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      let availableRooms = 15;
+      let bookedRooms = 0;
+
+      function bookRoom() {
+        if (availableRooms > 0) {
+        availableRooms--;
+        bookedRooms++;
+        updateDisplay();
+        } else {
+        alert("No available rooms left.");
+        }
+      }
+
+      function checkoutRoom() {
+        if (bookedRooms > 0) {
+        availableRooms++;
+        bookedRooms--;
+        updateDisplay();
+        } else {
+        alert("No rooms are currently booked.");
+        }
+      }
+
+      function updateDisplay() {
+        document.getElementById("availableRooms").textContent = availableRooms;
+        document.getElementById("bookedRooms").textContent = bookedRooms;
+      }
+      </script>
+
+  </body>
+</html>
